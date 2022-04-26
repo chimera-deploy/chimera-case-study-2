@@ -92,6 +92,7 @@
 							<ul class="actions">
 								<li><a href="#one" class="button scrolly">Read the writeup</a></li>
 								<li><a href="#eight" class="button scrolly">Watch the presentation</a></li>
+                <li><a href="#nine" class="button scrolly hide-when-big">Meet the Team</a></li>
 							</ul>
 						</div>
 
@@ -284,9 +285,9 @@
 									<section id="section52">
 										<h3 id="five.two">5.2 Collecting Metrics</h3>
                     <p>A particularly challenging part of designing Chimera was determining how Chimera would collect metrics from the canary service to determine whether a rollback should occur. We decided early on that we would use AWS CloudWatch for metrics monitoring because it is provided directly by AWS and works well with ECS with very little configuration. The hurdle we faced was determining how the metrics would be exported from the Envoy proxy attached to the canary into CloudWatch.</p>
-                    <img class="image fit" src="./images/chimera_visuals/metrics-collection.png" alt="multiple cloudwatch agents">
+                    <img class="image fit tall-image" src="./images/chimera_visuals/metrics-collection.png" alt="multiple cloudwatch agents">
                     <p>By default, the Envoy proxies used by App Mesh emit various metrics related to inter-service communication. The CloudWatch Agent application provided by AWS could be used to scrape these metrics, but this would require updating the task definition of each service in the ECS cluster to include this application. One of our key design goals was minimizing the impact that Chimera has on a user’s existing infrastructure, and this would require modifying each ECS service.</p>
-                    <img class="image fit" src="./images/chimera_visuals/prometheus-integration.png" alt="metrics collection using prometheus">
+                    <img class="image fit tall-image" src="./images/chimera_visuals/prometheus-integration.png" alt="metrics collection using prometheus">
                     <p>To address this, we decided to instead use Prometheus to collect metrics from the Envoy proxies. Prometheus is a monitoring service that can be configured to scrape the proxies at regular intervals and collect specific metrics. A single CloudWatch Agent that has been configured to use Prometheus can be deployed onto the ECS cluster. Prometheus will then handle the task of scraping each of the proxies and the CloudWatch Agent service will handle exporting the collected metrics to CloudWatch. This greatly reduces the complexity of the infrastructure Chimera needs to create and has very little impact on the user’s system.</p> 
 									</section>
 								</div>
@@ -354,7 +355,9 @@
 								<div class="inner">
 									<h2>7. References</h2>
 									<ol>
+                    <li><a href="https://martinfowler.com/bliki/CanaryRelease.html">Danilo Sato. "Canary Release" martinfowler.com, 25 Jun. 2014, martinfowler.com/bliki/CanaryRelease.html</a></li>
 									</ol>
+                  </div>
 							</div>
 						</section>
 					</section>
@@ -378,11 +381,11 @@
 
 						</div>
 						<div class="box alt">
-							<div class="row gtr-uniform">
+							<div class="row gtr-uniform" id="team-container">
 								<div class="col-3 center">
 									<img class="image fit align" src="./images/team_photos/will-rossen.jpg" alt="Will Rossen" />
 									<h3>Will Rossen</h3>
-									<div class="row center">
+									<div class="row center contact-icons">
                     <!-- TODO: Update these -->
 										<a href="mailto:wor101@gmail.com">
 											<img src="./images/email_icon-32.png" alt="">
@@ -398,7 +401,7 @@
 								<div class="col-3 center">
 									<img class="image fit align" src="./images/team_photos/wes-anderson.png" alt="Wes Anderson" />
 									<h3>Wes Anderson</h3>
-									<div class="row center">
+									<div class="row center contact-icons">
 										<a href="mailto:wesley.herb.anderson@gmail.com">
 											<img src="./images/email_icon-32.png" alt="Wes Anderson Email">
 										</a>
@@ -413,7 +416,7 @@
 								<div class="col-3 center">
 									<img class="image fit align" src="./images/team_photos/josh-leath.jpg" alt="Josh Leath" />
 									<h3>Josh Leath</h3>
-									<div class="row center">
+									<div class="row center contact-icons">
 										<a href="mailto:joshua.leath@icloud.com">
 											<img src="./images/email_icon-32.png" alt="Josh Leathemail">
 										</a>
@@ -428,7 +431,7 @@
 								<div class="col-3 center">
 									<img class="image fit align" src="./images/team_photos/trevor-kelly.jpg" alt="Trevor Kelly" />
 									<h3>Trevor Kelly</h3>
-									<div class="row center">
+									<div class="row center contact-icons">
 										<a href="mailto:trevor.daniel.kelly@gmail.com">
 											<img src="./images/email_icon-32.png" alt="Trevor Kelly email">
 										</a>
